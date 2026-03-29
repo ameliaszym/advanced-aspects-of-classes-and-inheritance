@@ -6,18 +6,17 @@ class Task(ABC):
         self.assigned_member = member
         self.completed = False
         self.comments = []
-        member.assign_task(self)
 
     def add_comment(self, comment):
         self.comments.append(comment)
 
     def show_comments(self):
-        return [c.display() for c in self.comments]
+        return list(self.comments)
 
     def complete(self):
         self.completed = True
         self.assigned_member.complete_task(self)
-        return f"Task '{self.title}' completed"
+        return f"Task '{self.title}' completed."
 
     @abstractmethod
     def get_type(self): pass

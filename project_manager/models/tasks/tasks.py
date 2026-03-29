@@ -1,6 +1,28 @@
 from .base_task import Task
 from datetime import datetime
 
+class BugTask(Task):
+    def __init__(self, title, member):
+        super().__init__(title, member)
+
+    def complete(self):         # nadpisywanie z rozszerzeniem
+        return super().complete() + " (bug fixed)"
+
+    def get_type(self):
+        return "bug"
+    
+class FeatureTask(Task):
+    def __init__(self, title, member):
+        super().__init__(title, member)
+
+    def complete(self):
+        return super().complete() + " (feature added)"
+
+    def get_type(self):
+        return "feature"
+    
+# --- Mixins ---
+
 class LoggerMixin:
     def complete(self):
         print(f"  [LOG] Completing task: '{self.title}'")

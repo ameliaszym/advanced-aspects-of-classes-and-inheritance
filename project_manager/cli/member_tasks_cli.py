@@ -3,10 +3,9 @@ from cli.task_cli import TaskCLI
 from services.task_service import TASK_TYPES
 
 class MemberTasksCLI:
-    def __init__(self, member, task_service, comment_service):
+    def __init__(self, member, task_service):
         self.member = member
         self.task_service = task_service
-        self.comment_service = comment_service
 
     def run(self):
         while True:
@@ -17,25 +16,21 @@ class MemberTasksCLI:
             print("\na. Add new task\nq. Quit")
             choice = input("> ").strip().lower()
             if choice == "q": break
-            elif choice == "a": self.add_task_to_member()
+            elif choice == "a": self._add_task()
             else:
-                try: TaskCLI(self.member.assigned_tasks[int(choice)], self.task_service, self.comment_service).run()
+                try: TaskCLI(self.member.assigned_tasks[int(choice)], self.task_service).run()
                 except (ValueError, IndexError):
                     os.system('cls')
                     print("Invalid task selection!")
 
-    def add_task_to_member(self):
+    def _add_task(self):
         title = input("Task title: ").strip()
         if not title:
             os.system('cls')
             print("Title cannot be empty.")
             return
-        allowed = {t for t in TASK_TYPES if self.member.role.can_create_task_type(t)}
+        allowed = self.task_service.allowed_task_types(self.member)
         task_type = input(f"Type ({'/'.join(sorted(allowed))}): ").strip().lower()
-        if task_type not in allowed:
-            os.system('cls')
-            print(f"'{task_type}' is not allowed task type. Allowed: {', '.join(sorted(allowed))}.")
-            return
         try:
             self.task_service.add_task(title, self.member, task_type)
             print("Task created successfully.")

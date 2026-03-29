@@ -1,11 +1,10 @@
 import os
-from models.tasks.advanced_task import AdvancedTask
+from models.tasks.tasks import AdvancedTask
 
 class TaskCLI:
-    def __init__(self, task, task_service, comment_service):
+    def __init__(self, task, task_service):
         self.task = task
         self.task_service = task_service
-        self.comment_service = comment_service
 
     def run(self):
         while True:
@@ -22,7 +21,7 @@ class TaskCLI:
             elif choice == "a":
                 content = input("Comment: ").strip()
                 if content:
-                    self.comment_service.add_comment(self.task, content)
+                    self.task_service.add_comment(self.task, content)
                     print("Comment added.")
             elif choice == "b":
                 if self.task.completed:
