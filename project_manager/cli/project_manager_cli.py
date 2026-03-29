@@ -19,13 +19,13 @@ class ProjectManagerCLI:
 
     def run(self):
         while True:
-            print("\n=== Project Manager CLI ===\n1. Add team member\n2. Show team members\n3. Show project report\n0. Exit")
+            print("\n=== Project Manager CLI ===\n1. Add team member\n2. Show team members\n3. Show project report\nq. Exit")
             choice = input("> ").strip()
             match choice:
                 case '1': self.add_team_member()
                 case '2': TeamCLI(self.project, self.task_service, self.comment_service).run()
                 case '3': self.show_project_report()
-                case '0': break
+                case 'q': break
                 case _:
                     os.system('cls')
                     print("Invalid option!")
