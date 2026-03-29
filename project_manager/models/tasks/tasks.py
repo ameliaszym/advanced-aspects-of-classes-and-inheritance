@@ -45,9 +45,6 @@ class AdvancedTask(LoggerMixin, TimestampMixin, Task):
     def get_type(self):
         return "advanced"
     
-    def complete(self):
-        return ""
-
     @classmethod
     def show_mro(cls):
         return [c.__name__ for c in cls.__mro__]        # MRO
