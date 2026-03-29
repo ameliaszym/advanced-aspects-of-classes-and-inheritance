@@ -9,7 +9,7 @@ class TaskCLI:
     def run(self):
         while True:
             print(f"\n=== Task: {self.task.title} [{self.task.get_type()}] [{"✔" if self.task.completed else "✘"}] ===")
-            if isinstance(self.task, AdvancedTask): print(f"Resolution order: {' -> '.join(self.task.show_mro())}")
+            if hasattr(self.task, 'show_mro'): print(f"Resolution order: {' -> '.join(self.task.show_mro())}")
             comments = self.task.show_comments()
             if comments:
                 print('Comments:')
