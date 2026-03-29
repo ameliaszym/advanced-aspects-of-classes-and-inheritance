@@ -33,13 +33,16 @@ class ProjectManagerCLI:
     def add_team_member(self):
         name = input("Name: ").strip()
         if not name:
+            os.system('cls')
             print("Name cannot be empty.")
             return
         if not TeamMember.validate_name(name):
+            os.system('cls')
             print("Invalid name format.")
             return
         role = input(f"Role ({'/'.join(sorted(ROLES))}): ").strip().lower()
         if role not in ROLES:
+            os.system('cls')
             print(f"Invalid role. Choose from: {', '.join(ROLES)}")
             return
         self.team_service.add_member(name, role)
