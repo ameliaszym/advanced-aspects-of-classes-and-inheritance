@@ -36,4 +36,4 @@ class Manager(Role):
         return None
  
     def can_create_task_type(self, task_type):
-        return True
+        return task_type in {"bug", "feature", "advanced"}
