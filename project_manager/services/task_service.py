@@ -12,7 +12,7 @@ class TaskService:
 
     def add_task(self, title, member, task_type):
         if task_type not in TASK_TYPES: raise ValueError(f"Unknown task type: '{task_type}'.")
-        if not member.role.can_create_task_type(task_type): raise PermissionError(f"{member.display()} cannot create '{task_type}' tasks. Allowed types: {', '.join(self._allowed_types_for(member))}." )
+        if not member.role.can_create_task_type(task_type): raise PermissionError(f"{member.display()} cannot create '{task_type}' tasks. Allowed types: {', '.join(self.allowed_task_types(member))}." )
         task = TASK_MAP[task_type](title, member)
         member.assign_task(task)
         self.project.add_task(task)
