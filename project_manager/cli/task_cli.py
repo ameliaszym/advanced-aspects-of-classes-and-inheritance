@@ -1,3 +1,4 @@
+import os
 from models.tasks.advanced_task import AdvancedTask
 
 class TaskCLI:
@@ -8,15 +9,14 @@ class TaskCLI:
 
     def run(self):
         while True:
-            task_type = self.task.get_type()
-            print(f"\n=== Task: {self.task.title} [{task_type}] ===")
-            if isinstance(self.task, AdvancedTask):
-                print(f"  Resolution order: {' -> '.join(self.task.show_mro())}")
+            print(f"\n=== Task: {self.task.title} [{self.task.get_type()}] [{"✔" if self.task.completed else "✘"}] ===")
+            if isinstance(self.task, AdvancedTask): print(f"Resolution order: {' -> '.join(self.task.show_mro())}")
             comments = self.task.show_comments()
             if comments:
-                for c in comments: print(f" - {c}")
-            else: print(" No comments yet.")
-            print("a. Add comment \nb. Complete task \nq. Quit")
+                print('Comments:')
+                for c in comments: print(f"\t- {c}")
+            else: print("No comments yet.")
+            print("\na. Add comment \nb. Complete task \nq. Quit")
             choice = input("> ").strip().lower()
             if choice == "q": break
             elif choice == "a":
@@ -26,6 +26,9 @@ class TaskCLI:
                     print("Comment added.")
             elif choice == "b":
                 if self.task.completed:
+                    os.system('cls') 
                     print("Task already completed.")
                 else: print(self.task_service.complete_task(self.task))
-            else: print("Invalid option.")
+            else:
+                os.system('cls')
+                print("Invalid option!")
