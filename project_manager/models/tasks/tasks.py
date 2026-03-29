@@ -7,7 +7,7 @@ class LoggerMixin:
     def complete(self):
         print(f"  [LOG] Completing task: '{self.title}'")
         result = super().complete()       # cooperative inheritance
-        print(f"  [LOG] Result: {result}")
+        print(f"  [LOG] Result: ", end="")
         return result
 
 class TimestampMixin:
@@ -15,7 +15,7 @@ class TimestampMixin:
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         print(f"  [TIMESTAMP] Completed at: {now}")
         return super().complete()       # cooperative inheritance
-    
+
 # --- Task types ---
 
 class BugTask(Task):
