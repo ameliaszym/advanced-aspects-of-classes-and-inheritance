@@ -2,10 +2,9 @@ import os
 from cli.member_tasks_cli import MemberTasksCLI
 
 class TeamCLI:
-    def __init__(self, project, task_service, comment_service):
+    def __init__(self, project, task_service):
         self.project = project
         self.task_service = task_service
-        self.comment_service = comment_service
 
     def run(self):
         if not self.project.team:
@@ -17,7 +16,7 @@ class TeamCLI:
             print("q. Quit")
             choice = input("> ").strip().lower()
             if choice == "q": break
-            try: MemberTasksCLI(self.project.team[int(choice)], self.task_service, self.comment_service).run()
+            try: MemberTasksCLI(self.project.team[int(choice)], self.task_service).run()
             except (ValueError, IndexError):
                 os.system('cls')
                 print("Invalid member selection!")

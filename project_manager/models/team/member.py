@@ -10,11 +10,7 @@ class TeamMember:
 
     def assign_task(self, task):        # metoda instancyjna
         max_tasks = self.role.get_max_tasks()
-        if max_tasks is not None and len(self.assigned_tasks) >= max_tasks:
-            raise ValueError(
-                f"{self.display()} has reached the task limit "
-                f"({max_tasks} active tasks allowed for {self.role.get_name()})."
-            )
+        if max_tasks is not None and len(self.assigned_tasks) >= max_tasks: raise ValueError(f"{self.display()} has reached the task limit {max_tasks} active tasks allowed for {self.role.get_name()}).")
         self.assigned_tasks.append(task)
 
     def complete_task(self, task):
@@ -22,12 +18,9 @@ class TeamMember:
         self.completed_tasks.append(task)
 
     def get_task_summary(self):
-        max_tasks = self.role.get_max_tasks()
-        limit_str = str(max_tasks) if max_tasks is not None else "∞"
-        return (
-            f"active: {len(self.assigned_tasks)}/{limit_str}, "
-            f"completed: {len(self.completed_tasks)}"
-        )
+        limit = self.role.get_max_tasks()
+        limit_str = str(limit) if limit is not None else "∞"
+        return (f"active: {len(self.assigned_tasks)}/{limit_str}, completed: {len(self.completed_tasks)}")
 
     def display(self):                  # polimorfizm
         return f"{self.role.get_name().lower()}: {self.name}"
