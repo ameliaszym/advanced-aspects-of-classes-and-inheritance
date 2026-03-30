@@ -4,16 +4,14 @@ from models.team.member import TeamMember
 from services.team_service import TeamService, ROLE_MAP
 from services.task_service import TaskService
 from cli.team_cli import TeamCLI
-from seeds.seeder import Seeder
+from seeds.seeds import seed
 
 class ProjectManagerCLI:
     def __init__(self):
         self.project = Project("Python project")
         self.team_service = TeamService(self.project)
         self.task_service = TaskService(self.project)
-
-        seeder = Seeder(self.team_service, self.task_service)
-        seeder.seed()
+        seed(self.team_service, self.task_service)
 
     def run(self):
         while True:
