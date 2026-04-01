@@ -1,4 +1,4 @@
-### Zadanie 1 - dodanie nowej roli
+### Zadanie 5 - dodanie nowej roli
 
 Aplikacja obsługuje trzy role: `Developer`, `Tester` i `Manager` \- wszystkie zdefiniowane w pliku `models/team/roles.py`. Każda rola dziedziczy po klasie `Role` i nadpisuje trzy metody: `get_name()`, `get_max_tasks()`, `can_create_task_type()`. Do zespołu dołączają projektanci, którzy potrzebują własnej roli. Dodaj do aplikacji nową rolę `Designer` (limit aktywnch zadań: `4`, dozwolone typy zadań: `feature` i `advanced`).
 
@@ -27,7 +27,7 @@ Modyfikacji należy dokonać w plikach: `models/team/roles.py` oraz `services/te
 
 ---
 
-### Zadanie 2 - dodanie nowego typu zadania
+### Zadanie 6 - dodanie nowego typu zadania
 
 Aplikacja obsługuje trzy typy zadań: `BugTask`, `FeatureTask`, `AdvancedTask`. Typ `AdvancedTask` używa dwóch mixinów (`LoggerMixin`, `TimestampMixin`), które wzbogacają metodę `complete()` przez cooperative inheritance z użyciem `super()`. Zespół zgłosił potrzebę implementacji nowego typu zadania - `ReviewTask` - odpowiedzialnego za code review.
 
@@ -65,7 +65,7 @@ Modyfikacji należy dokonać w plikach: `models/tasks/tasks.py`, `models/team/ro
 
 ---
 
-### Zadanie 3 - dodanie nowych mixinów i analiza MRO
+### Zadanie 7 - dodanie nowych mixinów i analiza MRO
 
 W projekcie istnieją już dwa mixiny: `LoggerMixin` i `TimestampMixin`, które wzbogacają metodę `complete()` klasy `AdvancedTask` przez cooperative inheritance z użyciem `super()`. Zespół zgłosił potrzebę rozszerzenia systemu o trzy nowe mixiny: `ValidationMixin`, `AuditMixin` i `NotifyMixin`, które mają zostać dołączone do klasy `AdvancedTask`.
 
